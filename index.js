@@ -18,7 +18,7 @@ app.engine('.hbs', exphbs.engine({
 app.set('view engine', 'hbs');
 
 
-const inicio= app.get("/", (req, res) => {
+app.get("/", (req, res) => {
   const context={
     title: "Producto",
     price: "Precio",
@@ -42,4 +42,3 @@ server.on("error", (error) => {
   console.log(`An error ocurred on the server ${error.message}`);
 });
 
-module.exports = inicio;

@@ -2,7 +2,6 @@ const express = require("express");
 const Container = require('../class');
 const fs = require("fs");
 const validateBody = require("../middlewares/validateBody");
-const inicio = require("../index")
 
 const router = express.Router();
 const file = new Container('files/products.txt');
@@ -15,8 +14,13 @@ router.use((req, res, next) => {
 router.get("/products", async (req, res) => {
   let allProducts = await fs.promises.readFile(file.fileName, "utf-8");
   allProducts = JSON.parse(allProducts);
-  res.status(200).send({ products: allProducts });
+  const context = {
+    allProducts,
+    print: true
+  };
   console.log(allProducts);
+  res.render("index", context);
+  // res.redirect("/");
 });
 
 router.get("/products/:id", async (req, res) => {
@@ -46,19 +50,14 @@ router.post("/products/", express.json(), validateBody, async (req, res) => {
     }
 
     products.push(newProduct);
-    //await fs.promises.writeFile(file.fileName, JSON.stringify(products));
-    // const context = {
-    //   newProduct :"Producto cargado exitosamente",
-    //   print: true
-    // };
-    // res.render("index", context);
+    await fs.promises.writeFile(file.fileName, JSON.stringify(products));
     const context = {
       newProduct: "Producto cargado exitosamente",
-      inicio,
-    }
-    res.render("index", context);
-    //return res.status(200).send({ productoAgregado: newProduct });
+      printLoad: true
+    };
 
+    res.render("index", context);
+    res.redirect("/");
   } catch (error) {
     return res.status(404).send({ error: error.message });
   }

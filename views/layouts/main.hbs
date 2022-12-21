@@ -13,12 +13,18 @@
   <script src=""></script>
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-  <title>Express Avanzado Clase 7</title>
+  <title>Motores de plantillas</title>
 </head>
 
 <body>
-  
+
   {{{body}}}
+  {{#if print}}
+    {{>products}}
+    {{else}}
+      {{>agregarProducto}}
+  {{/if}}
 
 </body>
+
 </html>
