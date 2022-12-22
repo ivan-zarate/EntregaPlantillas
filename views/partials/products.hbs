@@ -1,4 +1,4 @@
-{{#if print}}
+{{#if printProducts}}
     <div class="table-responsive">
         <table class="table table-dark">
             <tr style="color: yellow">
@@ -6,8 +6,8 @@
                 {{#each allProducts}}
                     <tr>
                         <td>{{title}}</td>
-                        <td>{{price}}</td>
-                        <td><img src="{{thumbnail}}" alt="{{title}}"></td>
+                        <td>${{price}}</td>
+                        <td><img style="height:4em"src="{{thumbnail}}" alt="{{title}}"></td>
                     </tr>  
                 {{/each}}
             </tr>

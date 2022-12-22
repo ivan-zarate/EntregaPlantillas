@@ -16,11 +16,10 @@ router.get("/products", async (req, res) => {
   allProducts = JSON.parse(allProducts);
   const context = {
     allProducts,
-    print: true
+    printProducts: true,
   };
-  console.log(allProducts);
+
   res.render("index", context);
-  // res.redirect("/");
 });
 
 router.get("/products/:id", async (req, res) => {
@@ -35,7 +34,7 @@ router.get("/products/:id", async (req, res) => {
   }
 });
 
-router.post("/products/", express.json(), validateBody, async (req, res) => {
+router.post("/products", express.json(), validateBody, async (req, res) => {
   try {
     const { title, price, thumbnail } = req.body;
     let newProduct = {};
@@ -51,12 +50,12 @@ router.post("/products/", express.json(), validateBody, async (req, res) => {
 
     products.push(newProduct);
     await fs.promises.writeFile(file.fileName, JSON.stringify(products));
-    const context = {
-      newProduct: "Producto cargado exitosamente",
-      printLoad: true
-    };
+    // const context = {
+    //   newProduct: "Producto cargado exitosamente",
+    //   printLoad: true
+    // };
 
-    res.render("index", context);
+    // res.render("index", context);
     res.redirect("/");
   } catch (error) {
     return res.status(404).send({ error: error.message });

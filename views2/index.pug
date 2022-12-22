@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+html 
+    head 
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
+        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js") 
+        title Plantilla Pug
+    body
+        nav(class='navbar navbar-success bg-success mb-4')
+            a(href="/" class="navbar-brand text-light") Coder-House
+        if (printProducts)
+            div(class="table-responsive")
+                table(class="table table-dark")
+                    tr(style="color: yellow")
+                        th="Producto"
+                        th="Precio"
+                        th="Imagen"
+                        each item in allProducts
+                            tr
+                                td=item.title
+                                td=item.price
+                                td: img(
+                                        style="height:4em"
+                                        src=item.thumbnail
+                                        alt=item.title
+                                    )
+            div(class="container")
+                form(action="api/products" method="post")
+                    button(class="btn btn-success my-2 my-sm-0" type="submit") Agregar producto
+        else
+            div(class='container')
+                form(action="api/products" method="post")
+                    input(
+                        type="text"
+                        name=title 
+                        id=title 
+                        placeholder=title
+                    )
+                    input(
+                        type="number"
+                        name=price 
+                        id=price 
+                        placeholder=price
+                    )
+                    input(
+                        type="url"
+                        name=thumbnail 
+                        id=thumbnail 
+                        placeholder=thumbnail
+                    )    
+                    button(class="btn btn-success my-2 my-sm-0" type="submit") Agregar
+
+                form(action="api/products" method="get")
+                    button(class="btn btn-success my-2 my-sm-0" type="submit") Ver productos
+    
+        
