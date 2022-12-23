@@ -30,8 +30,8 @@
                         <th>Imagen</th>
                         <% allProducts.forEach((product)=>{ %>
                     <tr>
-                        <td><%-product.title%></td>
-                        <td>$<%product.price%></td>
+                        <td><%=product.title%></td>
+                        <td>$<%=product.price%></td>
                         <td><img style="height:4em; width:4em" src="<%=product.thumbnail%>" alt="<%=product.title%>"></td>
                     </tr>
                     <%}); %>
