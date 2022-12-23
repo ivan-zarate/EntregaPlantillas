@@ -8,20 +8,34 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.set('views', path.join(__dirname, 'views2'));
-app.engine('.hbs', exphbs.engine({
-  layoutsDir: app.get('views')+ '/layouts',
-  partialsDir: app.get('views')+ '/partials',
-  extname: '.hbs'
-}))
+//Handlebars
+//app.set('views', path.join(__dirname, 'views'));
+// app.engine('.hbs', exphbs.engine({
+//   layoutsDir: app.get('views')+ '/layouts',
+//   partialsDir: app.get('views')+ '/partials',
+//   extname: '.hbs'
+// }))
+
+//Pug
+//app.set('views', path.join(__dirname, 'views2'));
+
+//Ejs
+app.set('views', path.join(__dirname, 'views3'));
+
+
 //app.set('view engine', 'hbs');
-app.set('view engine', 'pug');
+//app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
+
+let allProducts=[{}];
 
 app.get("/", (req, res) => {
   const context={
     title: "Producto",
     price: "Precio",
     thumbnail:"imagen",
+    allProducts,
+    printProducts:false
 }
  
 res.render("index", context);
